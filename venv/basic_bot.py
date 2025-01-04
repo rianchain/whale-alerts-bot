@@ -19,3 +19,11 @@ def main():
     application = Application.builder().token(bot_token).build()
 
     # add handlers
+    application.add_handler(CommandHandler("start", start))
+
+    # Run the bot
+    application.run_polling()
+
+
+if __name__ == "__main__":
+    main()
