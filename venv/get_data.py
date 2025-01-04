@@ -18,3 +18,5 @@ def fetch_data(url):
 
 
 transactions = fetch_data(transactions_url)
+if transactions:
+    print(json.dumps(transactions, indent=4))
