@@ -12,4 +12,6 @@ transactions_url = f"https://{chain_id}.insight.thirdweb.com/v1/transactions?lim
 
 # https://1.insight.thirdweb.com/v1/transactions?limit=5&clientId=9e33a4cef6d76467bc53fdd1f491213a
 
-
+def fetch_url(url):
+    response = requests.get(url)
+    return response.json()
