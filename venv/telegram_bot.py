@@ -38,7 +38,16 @@ def fetch_transactions(
         response = requests.get(transactions_url, params=params)
         response.raise_for_status()
         return response.json()
-        
     except requests.exceptions.RequestException as e:
 
         return {"error": str(e)}
+
+
+async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    welcome_text = (
+        "Welcome to the WHALERTS Whale Tracker Bot! 🚀\n\n"
+        "With this bot, you can:\n"
+        "- Monitor blockchain activity. \n"
+        "- Track specific wallet addresses. \n\n"
+        "Use /setup to configure your bot preferences.\n"
+    )
