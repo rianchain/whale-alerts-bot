@@ -98,3 +98,12 @@ async def set_interval(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     interval = interval_mapping.get(interval_text, 60)
     user_data[user_id]["interval"] = interval
+
+    # Send confirmation to the user
+    await update.message.reply_text(
+        f"Setup complete!\n\nTracking the following:\n"
+        f"- Chain: {user_data[user_id]['chain']}\n"
+        f"- Wallet: {user_data[user_id]['wallet']}\n"
+        f"- Update Interval: {interval_text}\n"
+    )
+
