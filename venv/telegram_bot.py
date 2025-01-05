@@ -130,3 +130,6 @@ def main():
         fallbacks=[CommandHandler("cancel", cancel)],
     )
 
+    # Add the rest of the handlers
+    application.add_handler(CommandHandler("start", start))
+    application.add_handler(setup_handler)
