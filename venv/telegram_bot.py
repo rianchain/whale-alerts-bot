@@ -127,6 +127,16 @@ async def track_wallet_activity(bot, user_id):
         "Sepolia": "https://sepolia.etherscan.io",
     }
 
+    while user_id in user_data:
+        user_chain = user_data[user_id]["chain"]
+        wallet_address = user_data[user_id]["wallet"]
+        chain_id = chain_mapping.get(user_chain, 1)
+        block_explorer = block_explorer_mapping.get(
+            user_chain, "https://etherscan.io/tx"
+        )
+
+        transaction = fetch_transactions(chain_id, client_id, wallet_address)
+
 
 def main():
     bot_token = "7618502843:AAGFj67PXpCmE18PpCvF86CnyRsa4u9JYOQ"
