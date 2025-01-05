@@ -106,4 +106,27 @@ async def set_interval(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
         f"- Wallet: {user_data[user_id]['wallet']}\n"
         f"- Update Interval: {interval_text}\n"
     )
+    return ConversationHandler.END
+
+async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
+    await update.message.reply_text(
+        "Setup cancelled", reply_markup=ReplyKeyboardRemove()
+    )
+    return ConversationHandler.END
+
+
+def main():
+    bot_token = "7618502843:AAGFj67PXpCmE18PpCvF86CnyRsa4u9JYOQ"
+    application = Application.builder().token(bot_token).build()
+    print("Application bot started!")
+
+    setup_handler = ConversationHandler(
+        entry_points=[CommandHandler("setup", setup)],
+        states={
+            CHAIN: [MessageHandler(filters.TEXT & ~filters.COMMAND, set_chain)],
+            WALLET: [MessageHandler(filters.TEXT & ~filters.COMMAND, set_wallet)],
+            INTERVAL: [MessageHandler(filters.TEXT & ~filters.COMMAND, set_interval)],
+        },
+        fallbacks=[CommandHandler("cancel", cancel)],
+    )
 
