@@ -34,6 +34,11 @@ def fetch_transactions(
             "sort_order": sort_order,
             "filter_from_address": wallet_address,
         }
+
+        response = requests.get(transactions_url, params=params)
+        response.raise_for_status()
+        return response.json()
+        
     except requests.exceptions.RequestException as e:
 
         return {"error": str(e)}
