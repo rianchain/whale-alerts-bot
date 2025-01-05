@@ -74,3 +74,11 @@ async def set_chain(update: Update, context: ContextTypes.DEFAULT_TYPE):
 async def set_wallet(update: Update, context: ContextTypes.DEFAULT_TYPE):
     wallet = update.message.text
     user_data[update.effective_user.id]["wallet"] = wallet
+
+    await update.message.reply_text(
+        "Please enter the interval for the transactions updates (in seconds)",
+        reply_markup=ReplyKeyboardMarkup(
+            [["10", "30", "60"]], one_time_keyboard=True
+        ),
+    )
+    return INTERVAL
