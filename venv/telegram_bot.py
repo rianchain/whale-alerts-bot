@@ -95,3 +95,6 @@ async def set_interval(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
         "4 hours": 14400,
         "12 hours": 43200,
     }
+
+    interval = interval_mapping.get(interval_text, 60)
+    user_data[user_id]["interval"] = interval
