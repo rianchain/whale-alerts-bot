@@ -106,6 +106,9 @@ async def set_interval(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
         f"- Wallet: {user_data[user_id]['wallet']}\n"
         f"- Update Interval: {interval_text}\n"
     )
+
+    asyncio.create_task(track_wallet_activity(context.bot, user_id))
+
     return ConversationHandler.END
 
 async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
