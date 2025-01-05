@@ -68,6 +68,9 @@ async def set_chain(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
         "Please enter the wallet address you want to track!",
         reply_markup=ReplyKeyboardRemove(),
-
     )
     return WALLET
+
+async def set_wallet(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    wallet = update.message.text
+    user_data[update.effective_user.id]["wallet"] = wallet
