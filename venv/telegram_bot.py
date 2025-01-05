@@ -137,6 +137,12 @@ async def track_wallet_activity(bot, user_id):
 
         transaction = fetch_transactions(chain_id, client_id, wallet_address)
 
+        # Send the response to the user
+        if "error" in transactions:
+            await bot.send_message(
+                user_id, f"Error fetching transactions: {transactions['error']}"
+            )
+
 
 def main():
     bot_token = "7618502843:AAGFj67PXpCmE18PpCvF86CnyRsa4u9JYOQ"
