@@ -26,7 +26,14 @@ def fetch_transactions(
         sort_order="desc",
 ):
     try: 
-        transactions_url = f"https://{chain_id}.insight.thirdweb.com/v1/transactions?limit={limit}&clientId={client_id}&sort_by={sort_by}&sort_order={sort_order}&filter_from_address={wallet_address}"
+        transactions_url = (f"https://{chain_id}.insight.thirdweb.com/v1/transactions")
+        params = {
+            "limit": limit,
+            "clientId": client_id,
+            "sort_by": sort_by,
+            "sort_order": sort_order,
+            "filter_from_address": wallet_address,
+        }
     except requests.exceptions.RequestException as e:
 
         return {"error": str(e)}
