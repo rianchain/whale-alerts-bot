@@ -57,7 +57,7 @@ async def setup(update: Update, context: ContextTypes.DEFAULT_TYPE):
     await update.message.reply_text(
         "Which blockchain network do you want to work with? (e.g., Ethereum, Solana, etc.)",
         reply_markup=ReplyKeyboardMarkup(
-            [["Ethereum", "Solana"]], one_time_keyboard=True
+            [["Ethereum", "Solana", "Sepolia"]], one_time_keyboard=True
         ),
     )
     return CHAIN
@@ -101,7 +101,7 @@ async def set_interval(update: Update, context: ContextTypes.DEFAULT_TYPE) -> in
 
     # Send confirmation to the user
     await update.message.reply_text(
-        f"Setup complete!\n\nTracking the following:\n"
+        f"Setup complete🎉\n\nTracking the following:\n"
         f"- Chain: {user_data[user_id]['chain']}\n"
         f"- Wallet: {user_data[user_id]['wallet']}\n"
         f"- Update Interval: {interval_text}\n"
@@ -113,6 +113,19 @@ async def cancel(update: Update, context: ContextTypes.DEFAULT_TYPE) -> None:
         "Setup cancelled", reply_markup=ReplyKeyboardRemove()
     )
     return ConversationHandler.END
+
+async def track_wallet_activity(bot, user_id):
+    chain_mapping = {
+        "Ethereum": 1,
+        "Solana": 2212,
+        "Sepolia": 11155111,
+    }
+
+    block_explorer_mapping = {
+        "Ethereum": "https://etherscan.io",
+        "Solana": "https://solscan.io",
+        "Sepolia": "https://sepolia.etherscan.io",
+    }
 
 
 def main():
