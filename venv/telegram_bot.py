@@ -51,3 +51,4 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "- Track specific wallet addresses. \n\n"
         "Use /setup to configure your bot preferences.\n"
     )
+    await update.message.reply_text(welcome_text)
