@@ -10,7 +10,7 @@ from telegram.ext import (
     ConversationHandler,
 )
 
-SELECT THE CHAIN => SELECT THE WALLET THEY WANT TO TRACK => SELECT THE TIME INTERVAL THEY WANT TO BE NOTIFIED
+# SELECT THE CHAIN => SELECT THE WALLET THEY WANT TO TRACK => SELECT THE TIME INTERVAL THEY WANT TO BE NOTIFIED
 
 CHAIN, WALLET, INTERVAL = range(3)
 
@@ -133,3 +133,8 @@ def main():
     # Add the rest of the handlers
     application.add_handler(CommandHandler("start", start))
     application.add_handler(setup_handler)
+    
+    application.run_polling()
+
+if __name__ == "__main__":
+    main()
