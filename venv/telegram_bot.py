@@ -52,3 +52,12 @@ async def start(update: Update, context: ContextTypes.DEFAULT_TYPE):
         "Use /setup to configure your bot preferences.\n"
     )
     await update.message.reply_text(welcome_text)
+
+async def setup(update: Update, context: ContextTypes.DEFAULT_TYPE):
+    await update.message.reply_text(
+        "Which blockchain network do you want to work with? (e.g., Ethereum, Solana, etc.)",
+        reply_markup=ReplyKeyboardMarkup(
+            [["Ethereum", "Solana"]], one_time_keyboard=True
+        ),
+    )
+    return CHAIN
