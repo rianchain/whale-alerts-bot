@@ -142,7 +142,36 @@ async def track_wallet_activity(bot, user_id):
             await bot.send_message(
                 user_id, f"Error fetching transactions: {transactions['error']}"
             )
+        elif transactions and "data" in transactions:
+            message = []
+            for tx in transactions["data"]:
+                if tx["value"] == 0:
+                    continue
 
+                value_eth = tx["value"] / 10**18
+                direction = (
+                    "to"
+                    if tx["from address"].lower() == wallet_address.lower()
+                    else "from"
+                )
+                counterparty = (
+                    tx["to_address"] if direction == "to" else tx["from_address"]
+                )
+                hash_link = f"{block_explorer}/tx/{tx['hash']}"
+                message = (
+                    f"Transation Alert ⚠️:\n\n"
+                    f"Wallet has send/received {value_eth:.6f} ETH {direction}{counterparty}.\n"
+                    f"Transaction Hash: [View on Explorer]({hash_link})\n"
+                    f"Block Number: {tx['block_number']}\n"
+                    f"Timestamp : {tx['block_timestamp']}\n"
+                )
+                message.append(message)
+
+            # Send each formatted transcation to the user
+            for message in message:
+                await bot.send_message(user_id, message, parse_mode="Markdown")
+
+            await asyncio.sleep(user_data[user_id]["interval"])
 
 def main():
     bot_token = "7618502843:AAGFj67PXpCmE18PpCvF86CnyRsa4u9JYOQ"
