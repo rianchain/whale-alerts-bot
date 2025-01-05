@@ -83,3 +83,15 @@ async def set_wallet(update: Update, context: ContextTypes.DEFAULT_TYPE):
         ),
     )
     return INTERVAL
+
+
+async def set_interval(update: Update, context: ContextTypes.DEFAULT_TYPE) -> int:
+    interval_text = update.message.text
+    user_id = update.effective_user.id
+
+    interval_mapping = {
+        "1 Minute": 60,
+        "1 hour": 3600,
+        "4 hours": 14400,
+        "12 hours": 43200,
+    }
